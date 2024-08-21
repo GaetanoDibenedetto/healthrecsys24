@@ -42,10 +42,12 @@ Tested on Ubuntu 22.04.4 LTS with Python 3.8.19
 ## Reproducibility of Paper Results
 The dataset with our best checkpoint can be downloaded from the following link: [CLICK HERE](https://zenodo.org/records/11075018).
 
-The 3 folders must be inserted in a root folder of the project, after of the git clone of this repository, named `archives_data`, as in the tree structure following below:
+The folders must be inserted in a root folder of the project, after of the git clone of this repository, named `archives_data`, as in the tree structure following below:
 ```
 archives_data
 │   
+├───frames
+│
 ├───keypoints
 │       ap_1_250.jpg.npy
 │		...
@@ -58,9 +60,13 @@ archives_data
 │		...
 │       augmented_ms_3_51581.jpg.npy
 │       
-└───labels
-    └───result
-            labels_for_train.csv
+│───labels
+│    └───result
+│           labels_for_train.csv
+│
+└───model_checkpoint
+    └───keypoint
+            20240803093250.pkl          
 ```            
 
 ### Execution

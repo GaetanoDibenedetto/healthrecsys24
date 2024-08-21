@@ -170,3 +170,5 @@ archives_data/model_checkpoint/keypoint/*
 tmp
 mmpose
 mmdetection
+utils/pair_file_angles_stats.json
+utils/pair_file_angles.json

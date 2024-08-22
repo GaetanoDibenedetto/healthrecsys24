@@ -6,7 +6,7 @@ This repository contains the code and data to reproduce the experiments in the p
 This project has been tested on:
 - **OS**: Ubuntu 22.04.4 LTS
 - **Python**: 3.8.19
-- **PyTorch**: 2.1.0 (specific version constraints apply, see below)
+- **PyTorch**: 2.1.0
 
 ## Installation
 

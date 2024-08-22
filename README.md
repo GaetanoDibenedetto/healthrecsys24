@@ -1,22 +1,27 @@
 # healtrecsys24
 
-## Compatibility
-Tested on Ubuntu 22.04.4 LTS with Python 3.8.19
+This repository contains the code and data to reproduce the experiments in the paper "Insert Paper Title Here". It includes a pose classification model and tools for extracting keypoint data from human pose estimations.
 
+## Compatibility
+This project has been tested on:
+- **OS**: Ubuntu 22.04.4 LTS
+- **Python**: 3.8.19
+- **PyTorch**: 2.1.0 (specific version constraints apply, see below)
 
 ## Installation
 
 1. **Clone the repository**: 
     ```
-    git clone https://github.com/GaetanoDibenedetto/healtrecsys24.git
+    git clone https://github.com/GaetanoDibenedetto/healthrecsys24.git
     ```          
 
+2. **MMPose**: 
 
-2. **MMPose**: Install MMPose following the official guideline: [LINK](https://mmpose.readthedocs.io/en/latest/installation.html)
+    Follow the official MMPose installation guidelines [here](https://mmpose.readthedocs.io/en/latest/installation.html). Below is our installation pipeline:: 
 
-    We found trouble with the last version of pythorch.
-    We list here our installation pipeline
     ```
+    # We recommend using a virtual environment with Python 3.8
+    
     pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0
     pip install wheel
     pip install -U openmim
@@ -35,30 +40,29 @@ Tested on Ubuntu 22.04.4 LTS with Python 3.8.19
 
 3. **Install our requirements**:
     ```
-    pip install -r requireents.txt
+    pip install -r requirements.txt
     ```     
 
 
 ## Reproducibility of Paper Results
-The dataset with our best checkpoint can be downloaded from the following link: [CLICK HERE](https://zenodo.org/records/11075018).
+To reproduce the results, download the dataset and our best checkpoint from [Zenodo](https://zenodo.org/records/11075018). Place the downloaded `archives_data` folder in the root directory of the repository, with the following structure:
 
-The folders must be inserted in a root folder of the project, after of the git clone of this repository, named `archives_data`, as in the tree structure following below:
 ```
 archives_data
 │   
 ├───frames
 │
 ├───keypoints
-│       ap_1_250.jpg.npy
+│       ap_1_250.json
 │		...
 │		...
-│       ms_3_51581.jpg.npy
+│       ms_3_51581.json
 │       
 ├───keypoints_augmented
-│       augmented_ap_1_250.jpg.npy
+│       augmented_ap_1_250.json
 │		...
 │		...
-│       augmented_ms_3_51581.jpg.npy
+│       augmented_ms_3_51581.json
 │       
 │───labels
 │    └───result
@@ -70,19 +74,20 @@ archives_data
 ```            
 
 ### Execution
-To reproduce the results mentioned in the associated paper, the following scripts can be utilized in the following order:
+Follow these steps to reproduce the results from the paper:
 
 1. **Pose Classification Model (Section 4.2)**:
-  - `main_keypoint_classification.py`
+  - To create your own checkpoint, run the training script for classification:
+    - `main_keypoint_classification.py`
 
 2. **Compute Angles**:
-  - `compute_angles.py`
+  - To compute the average angles based on the keypoint coordinates:
+    - `compute_angles.py`
 
 3. **Reproduce the Demo Web App**:
-  - `web_app.py`
+  - To interact with the system via a web app, run the following script:
+    - `web_app.py`
 
-
-### Execution
 
 ## References
 

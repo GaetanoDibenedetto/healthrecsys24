@@ -14,6 +14,7 @@ import datetime
 from mmpose.apis import MMPoseInferencer
 
 from utils.utils import compute_angles, load_keypoint_in_torch, path_model_checkpoint, path_pair_file_angles_stats_json
+
 import transformers
 
 import gradio as gr
@@ -27,8 +28,6 @@ device = "cpu"
 if torch.cuda.is_available():
     # if GPU available, use cuda (on a cpu, training will take a considerable length of time!)
     device = "cuda"
-    if test:
-        device = "cuda:7"
 
 
 def predict_single_image(model, result):
@@ -165,7 +164,7 @@ class llama:
         input = [
             {
                 "role": "system",
-                "content": "You are a medical assistant able to suggest a specific phisical exercise for users with uneven body parts to prevent an increase in their unease.",
+                "content": "You are a medical assistant able to suggest a specific physical exercise for users with uneven body parts to prevent an increase in their unease.",
             },
             {"role": "user", "content": f"{text}"},
         ]

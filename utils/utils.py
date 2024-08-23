@@ -86,7 +86,7 @@ def calculate_vector_rotation_x(p1, p2):
     return calculate_vector_rotation(p1, p2, x_axis)
 
 
-def calculate_vector_rotation_y(p1, p2):
+def calculate_vector_rotation_z(p1, p2):
     y_axis = [0, 0, 1]
     return calculate_vector_rotation(p1, p2, y_axis)
 
@@ -148,9 +148,9 @@ def compute_angles(keypoints):
     mid_torso = keypoints[7]
     upper_torso = keypoints[8]
 
-    y_head_bottom_torso = calculate_vector_rotation_y(head, bottom_torso)
-    y_head_mid_torso = calculate_vector_rotation_y(head, mid_torso)
-    y_head_upper_torso = calculate_vector_rotation_y(head, upper_torso)
+    y_head_bottom_torso = calculate_vector_rotation_z(head, bottom_torso)
+    y_head_mid_torso = calculate_vector_rotation_z(head, mid_torso)
+    y_head_upper_torso = calculate_vector_rotation_z(head, upper_torso)
     
     x_head_bottom_torso = calculate_vector_rotation_x(head, bottom_torso)
     x_head_mid_torso = calculate_vector_rotation_x(head, mid_torso)

@@ -62,10 +62,10 @@ def load_keypoint(keypoint_path, normalize_keypoint=True):
 
 def load_keypoint_in_torch(keypoint):
     # removing legs keypoints
-    keypoint = np.delete(keypoint, 2)  # first knee
-    keypoint = np.delete(keypoint, 5)  # second knee
-    keypoint = np.delete(keypoint, 3)  # first feet
-    keypoint = np.delete(keypoint, 6)  # second feet
+    del keypoint[2]  # first knee
+    del keypoint[5]  # second knee
+    del keypoint[3]  # first feet
+    del keypoint[6]  # second feet
 
     keypoint = np.array([keypoint])
     keypoint = torch.tensor(keypoint).to(torch.float32)

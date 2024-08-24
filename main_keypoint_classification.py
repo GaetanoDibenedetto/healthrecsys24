@@ -24,9 +24,9 @@ df_augmented = dataset.load_dataset_info(path_keypoints_augmented)
 df_augmented = df_augmented[df_augmented["label"] == "[correct_posture]"]
 df = pd.concat([df, df_augmented], ignore_index=True)
 
-# df = df.drop(df[df.subject == "vr"].index)
-# df = df.drop(df[df.subject == "rt"].index)
-# df = df.drop(df[df.subject == "nl"].index)
+df = df.drop(df[df.subject == "vr"].index)
+df = df.drop(df[df.subject == "rt"].index)
+df = df.drop(df[df.subject == "nl"].index)
 
 df, label_list = map_label(df)
 
@@ -62,7 +62,7 @@ truelabels, predictions = run_pipeline(
     trainloader,
     valloader,
     testloader,
-    epochs=1,
+    epochs=1000,
     learning_rate=0.001,
     weight_loss=train_label_balance,
     device=device,

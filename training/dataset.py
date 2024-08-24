@@ -105,7 +105,7 @@ def return_data_loaders(
 
     for i in range(trainset.__len__()):
         x, y = trainset.__getitem__(i)
-        x_train.append(x.flatten().numpy())
+        x_train.append(x.numpy())
         y_train.append(y.argmax().numpy())
 
     if val_data is not None:
@@ -120,7 +120,7 @@ def return_data_loaders(
 
         for i in range(valset.__len__()):
             x, y = valset.__getitem__(i)
-            x_val.append(x.flatten().numpy())
+            x_val.append(x.numpy())
             y_val.append(y.argmax().numpy())
     else:
         x_val, y_val = None, None
@@ -135,7 +135,7 @@ def return_data_loaders(
     x_test, y_test = [], [] 
     for i in range(testset.__len__()):
         x, y = testset.__getitem__(i)
-        x_test.append(x.flatten().numpy())
+        x_test.append(x.numpy())
         y_test.append(y.argmax().numpy())
 
     import numpy as np

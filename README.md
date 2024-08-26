@@ -70,7 +70,7 @@ archives_data
 │
 └───model_checkpoint
     └───keypoint
-            20240803093250.pkl          
+            yyyyMMddHHmmss.pkl          
 ```            
 
 ### Execution

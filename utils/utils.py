@@ -26,6 +26,19 @@ path_pair_file_angles_stats_json = os.path.join("utils", "pair_file_angles_stats
 # get_skelton_info = lambda dataset: joints_dict()[dataset]["skeleton"]
 # get_joint_info = lambda dataset: joints_dict()[dataset]["keypoints"]
 
+keypoints_to_remove = []
+first_knee = 2
+keypoints_to_remove.append(first_knee)
+
+second_knee = 5
+keypoints_to_remove.append(second_knee)
+
+first_feet = 3
+keypoints_to_remove.append(first_feet)
+
+second_feet = 6
+keypoints_to_remove.append(second_feet)
+
 
 def set_all_seeds(seed):
     torch.manual_seed(seed)
@@ -62,10 +75,8 @@ def load_keypoint(keypoint_path, normalize_keypoint=True):
 
 def load_keypoint_in_torch(keypoint):
     # removing legs keypoints
-    del keypoint[2]  # first knee
-    del keypoint[5]  # second knee
-    del keypoint[3]  # first feet
-    del keypoint[6]  # second feet
+    for i in keypoints_to_remove:
+        del keypoint[i]
 
     keypoint = np.array([keypoint])
     keypoint = torch.tensor(keypoint).to(torch.float32)
@@ -129,29 +140,38 @@ def calculate_vector_rotation(p1, p2, axis=[1, 0, 0]):
 
     return angle_degrees
 
+def compute_index_keypoints(keypoint_index):
+    counter = 0
+    for i in keypoints_to_remove:
+        if i < keypoint_index:
+            counter += 1
+            
+    return keypoint_index - counter
+
+
 def compute_angles(keypoints):
     # shoulders keypoint
-    point1 = keypoints[14]
-    point2 = keypoints[11]
+    first_shoulder = keypoints[compute_index_keypoints(14)]
+    second_shoulder = keypoints[compute_index_keypoints(11)]
 
-    shoulder_level = calculate_vector_rotation_x(point1, point2)
+    shoulder_level = calculate_vector_rotation_x(first_shoulder, second_shoulder)
 
     # hips keypoint
-    point1 = keypoints[1]
-    point2 = keypoints[4]
+    first_hip = keypoints[compute_index_keypoints(1)]
+    second_hip = keypoints[compute_index_keypoints(4)]
 
-    hip_level = calculate_vector_rotation_x(point1, point2)
+    hip_level = calculate_vector_rotation_x(first_hip, second_hip)
 
     # head direction respect bottom torso, respect mid torso and respect to upper torso
-    head = keypoints[10]
-    bottom_torso = keypoints[0]
-    mid_torso = keypoints[7]
-    upper_torso = keypoints[8]
+    head = keypoints[compute_index_keypoints(10)]
+    bottom_torso = keypoints[compute_index_keypoints(0)]
+    mid_torso = keypoints[compute_index_keypoints(7)]
+    upper_torso = keypoints[compute_index_keypoints(8)]
 
     y_head_bottom_torso = calculate_vector_rotation_z(head, bottom_torso)
     y_head_mid_torso = calculate_vector_rotation_z(head, mid_torso)
     y_head_upper_torso = calculate_vector_rotation_z(head, upper_torso)
-    
+
     x_head_bottom_torso = calculate_vector_rotation_x(head, bottom_torso)
     x_head_mid_torso = calculate_vector_rotation_x(head, mid_torso)
     x_head_upper_torso = calculate_vector_rotation_x(head, upper_torso)

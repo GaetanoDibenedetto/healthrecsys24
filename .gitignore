@@ -161,7 +161,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-archives_data/frames/*
+archives_data/frames
 archives_data/frames_augmented/*
 archives_data/keypoints/*
 archives_data/keypoints_augmented/*

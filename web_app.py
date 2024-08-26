@@ -192,12 +192,15 @@ with open(path_pair_file_angles_stats_json) as f:
 DEFAULT_WELCOME_MESSAGE = "Welcome! Please upload or chose an image to get started."
 
 RATE_LABELS = [
-    "How much the exercise is clear",
-    "How much the exercise is useful",
-    "How much the exercise is easy to do",
-    "How much the exercise is enjoyable",
-    "How much the exercise is safe",
-    "How much the exercise is effective",
+f"Do you agree with the recommended exercises based on the user’s posture analysis?\n Rating: 1 (Totally Disagree) to 5 (Totally Agree)",
+
+f"Do the recommended exercises adequately address the user’s posture issue and imbalances?\n Rating: 1 (Totally Inadequate) to 5 (Totally Adequate)",
+
+f"Are the exercises clearly explained and easy to understand?\n Rating: 1 (Very Unclear) to 5 (Very Clear)",
+
+f"In your opinion, how effective would these exercises be in improving the user's posture?\n Rating: 1 (Not Effective at All) to 5 (Highly Effective)",
+
+f"Are the recommended exercises simple enough for the user to perform without expert supervision?\n Rating: 1 (Not Simple at All) to 5 (Very Simple)",
 ]
 
 frames_path = os.path.join("archives_data", "frames")
@@ -214,10 +217,21 @@ with gr.Blocks(
     title="Web App", fill_height=True, theme=gr.themes.Default(text_size="lg")
 ) as demo:
 
-    with gr.Column():
+    with gr.Column(show_progress=False):
         chatbot = gr.Chatbot(
             value=[(None, DEFAULT_WELCOME_MESSAGE)], scale=1, label=''
         )
+
+    with gr.Column():
+        with gr.Row():
+            msg = gr.Textbox(
+                lines=1,
+                label="What improvements would you suggest for this recommendation?",
+                placeholder="In italiano va anche bene!",
+                interactive=True,
+                scale=1,
+                visible=False,
+            )
 
     with gr.Column():
         with gr.Row():
@@ -247,6 +261,7 @@ with gr.Blocks(
     def restart():
         return (
             gr.update(value=None, visible=False),
+            gr.update(value=None, visible=False),
             gr.update(value=None, visible=True),
             gr.update(visible=True),
             gr.update(visible=False),
@@ -255,15 +270,16 @@ with gr.Blocks(
     def restart_clear_chat():
         return (
             gr.update(value=None, visible=False),
+            gr.update(value=None, visible=False),
             gr.update(value=None, visible=True),
             gr.update(visible=True),
             gr.update(visible=False),
             gr.update(value=[(None, DEFAULT_WELCOME_MESSAGE)]),
         )
 
-    restart_button.click(restart, outputs=[rate_story, image_input, input_box, restart_box])
+    restart_button.click(restart, outputs=[msg, rate_story, image_input, input_box, restart_box])
     restart_clear_chat_button.click(
-        restart_clear_chat, outputs=[rate_story, image_input, input_box, restart_box, chatbot]
+        restart_clear_chat, outputs=[msg, rate_story, image_input, input_box, restart_box, chatbot]
     )
 
     def respond(image_path, chat_history, rate_story):
@@ -277,6 +293,7 @@ with gr.Blocks(
             chat_history.append(("Reccomendation:", llama_output))
             return (
                 chat_history,
+                gr.update(visible=False),
                 gr.update(visible=True, label=RATE_LABELS[0]),
                 gr.update(value=None, visible=False),
                 gr.update(visible=False),
@@ -285,6 +302,7 @@ with gr.Blocks(
         return (
             chat_history,
             gr.update(visible=False),
+            gr.update(visible=False),
             gr.update(value=None, visible=False),
             gr.update(visible=True),
         )
@@ -292,7 +310,7 @@ with gr.Blocks(
     submit_button.click(
         respond,
         [image_input, chatbot, rate_story],
-        [chatbot, rate_story, input_box, restart_box],
+        [chatbot, msg, rate_story, input_box, restart_box],
     )
 
     def rate(choice, chat_history, restart):
@@ -316,25 +334,6 @@ with gr.Blocks(
                     break
 
             if counter == len(RATE_LABELS):
-
-                with open("tmp/conversations.jsonl", "a", encoding="utf8") as f:
-
-                    fcntl.flock(f, fcntl.LOCK_EX)
-
-                    complete_dialogue = chat_history[
-                        len(chat_history) - (len(RATE_LABELS) + 2) :
-                    ]
-                    dialogue_to_save = []
-
-                    for user_msg, sys_msg in complete_dialogue:
-                        dialogue_to_save.append({"user": user_msg, "system": sys_msg})
-
-                    json.dump({"dialogue": dialogue_to_save}, f)
-                    f.write(f"\n{datetime.datetime.now()}\n\n")
-
-                    fcntl.flock(f, fcntl.LOCK_UN)
-                    chat_history.append((None, "Survey completed!"))
-
                 return (
                     gr.update(value=None, visible=False),
                     chat_history,
@@ -354,8 +353,33 @@ with gr.Blocks(
     rate_story.change(
         fn=rate,
         inputs=[rate_story, chatbot, restart_button],
-        outputs=[rate_story, chatbot, restart_box],
+        outputs=[rate_story, chatbot, msg],
     )
+
+    def expert_answer(text, chat_history, rate_story):
+        chat_history.append((None, text))
+
+        with open("tmp/conversations.jsonl", "a", encoding="utf8") as f:
+
+            fcntl.flock(f, fcntl.LOCK_EX)
+
+            complete_dialogue = chat_history[
+                len(chat_history) - (len(RATE_LABELS) + 2) :
+            ]
+            dialogue_to_save = []
+
+            for user_msg, sys_msg in complete_dialogue:
+                dialogue_to_save.append({"user": user_msg, "system": sys_msg})
+
+            json.dump({"dialogue": dialogue_to_save}, f)
+            f.write(f"\n{datetime.datetime.now()}\n\n")
+
+            fcntl.flock(f, fcntl.LOCK_UN)
+            chat_history.append((None, "Survey completed!"))   
+
+        return  gr.update(value=None, visible=False), chat_history, gr.update(visible=True)
+
+    msg.submit(expert_answer, [msg, chatbot, rate_story], [msg, chatbot, restart_box])
 
 
 demo.launch(share=True)

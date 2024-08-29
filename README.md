@@ -45,7 +45,7 @@ This project has been tested on:
 
 
 ## Reproducibility of Paper Results
-To reproduce the results, download the dataset and our best checkpoint from [Zenodo](https://zenodo.org/records/11075018). Place the downloaded `archives_data` folder in the root directory of the repository, with the following structure:
+To reproduce the results, download the dataset and our best checkpoint from [Zenodo](https://zenodo.org/records/13498794). Place the downloaded `archives_data` folder in the root directory of the repository, with the following structure:
 
 ```
 archives_data

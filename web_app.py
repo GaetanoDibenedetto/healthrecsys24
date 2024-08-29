@@ -192,15 +192,15 @@ with open(path_pair_file_angles_stats_json) as f:
 DEFAULT_WELCOME_MESSAGE = "Welcome! Please upload or chose an image to get started."
 
 RATE_LABELS = [
-f"Do you agree with the recommended exercises based on the user’s posture analysis?\n Rating: 1 (Totally Disagree) to 5 (Totally Agree)",
+f"1. Do you agree with the recommended exercises based on the user’s posture analysis?\n Rating: 1 (Totally Disagree) to 5 (Totally Agree)",
 
-f"Do the recommended exercises adequately address the user’s posture issue and imbalances?\n Rating: 1 (Totally Inadequate) to 5 (Totally Adequate)",
+f"2. Do the recommended exercises adequately address the user’s posture issue and imbalances?\n Rating: 1 (Totally Inadequate) to 5 (Totally Adequate)",
 
-f"Are the exercises clearly explained and easy to understand?\n Rating: 1 (Very Unclear) to 5 (Very Clear)",
+f"3. Are the exercises clearly explained and easy to understand?\n Rating: 1 (Very Unclear) to 5 (Very Clear)",
 
-f"In your opinion, how effective would these exercises be in improving the user's posture?\n Rating: 1 (Not Effective at All) to 5 (Highly Effective)",
+f"4. In your opinion, how effective would these exercises be in improving the user's posture?\n Rating: 1 (Not Effective at All) to 5 (Highly Effective)",
 
-f"Are the recommended exercises simple enough for the user to perform without expert supervision?\n Rating: 1 (Not Simple at All) to 5 (Very Simple)",
+f"5. Are the recommended exercises simple enough for the user to perform without expert supervision?\n Rating: 1 (Not Simple at All) to 5 (Very Simple)",
 ]
 
 frames_path = os.path.join("archives_data", "frames")
@@ -321,7 +321,7 @@ with gr.Blocks(
 
             choice_str = f"Rating {choice} was received and registered!"
             chat_history.append((None, choice_str))
-            time.sleep(0.5)
+            time.sleep(2)
 
             chat_history_len = len(chat_history)
 
@@ -341,7 +341,6 @@ with gr.Blocks(
                 )
 
             else:
-
                 return (
                     gr.update(value=None, label=RATE_LABELS[counter]),
                     chat_history,
@@ -364,7 +363,7 @@ with gr.Blocks(
             fcntl.flock(f, fcntl.LOCK_EX)
 
             complete_dialogue = chat_history[
-                len(chat_history) - (len(RATE_LABELS) + 2) :
+                len(chat_history) - (len(RATE_LABELS) + 3) :
             ]
             dialogue_to_save = []
 

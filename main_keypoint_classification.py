@@ -69,4 +69,7 @@ truelabels, predictions = run_pipeline(
     model_type="keypoint",
 )
 
+#Test only
+# truelabels, predictions = test_load_model(testloader, model_path=None, device=device)
+
 print_report(truelabels, predictions)

@@ -177,3 +177,17 @@ def compute_angles(keypoints):
     x_head_upper_torso = calculate_vector_rotation_x(head, upper_torso)
 
     return shoulder_level, hip_level, y_head_mid_torso, y_head_upper_torso, y_head_bottom_torso, x_head_mid_torso, x_head_upper_torso, x_head_bottom_torso
+
+def load_model_classification(model_path=None, model_type="keypoint", device="cuda"):
+    # load model
+    if model_path is None:
+        model_path = os.path.join(path_model_checkpoint, model_type)
+        list_models = os.listdir(model_path)
+        list_models.sort()
+        model_name = list_models[0]
+        model_path = os.path.join(model_path, model_name)
+        
+    model = torch.load(model_path)
+    model.to(device)
+    model.eval()
+    return model

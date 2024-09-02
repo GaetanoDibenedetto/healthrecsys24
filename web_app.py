@@ -13,7 +13,7 @@ import datetime
 
 from mmpose.apis import MMPoseInferencer
 
-from utils.utils import compute_angles, load_keypoint_in_torch, path_model_checkpoint, path_pair_file_angles_stats_json
+from utils.utils import compute_angles, load_keypoint_in_torch, path_model_checkpoint, path_pair_file_angles_stats_json, load_model_classification
 
 import transformers
 
@@ -104,21 +104,6 @@ def inference(img):
         llama_output = None
 
     return output_text, llama_output, visualization, prediction
-
-
-def load_model_classification(model_path=None, model_type="keypoint"):
-    # load model
-    if model_path is None:
-        model_path = os.path.join(path_model_checkpoint , model_type)
-        
-    list_models = os.listdir(model_path)
-    list_models.sort()
-    model_name = list_models[0]
-    model_path = os.path.join(model_path, model_name)
-    model = torch.load(model_path)
-    model.to(device)
-    model.eval()
-    return model
 
 
 def load_keypoint_extractor():

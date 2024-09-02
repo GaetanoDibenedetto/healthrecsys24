@@ -7,7 +7,7 @@ import torch.optim as optim
 from torch import nn
 from tqdm import tqdm
 
-from utils.utils import path_model_checkpoint
+from utils.utils import load_model_classification, path_model_checkpoint
 
 
 def train(model, device, train_loader, optimizer, epoch, _loss_criteria=None):
@@ -157,3 +157,9 @@ def save_model(model, model_type="image"):
         model,
         os.path.join(model_path, f"{datetime.now().strftime('%Y%m%d%H%M%S')}.pkl"),
     )
+
+
+def test_load_model(testloader, model_path=None, device="cuda"): 
+    model = load_model_classification(model_path)
+
+    return test(model, device, testloader)

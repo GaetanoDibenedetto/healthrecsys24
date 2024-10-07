@@ -1,8 +1,11 @@
-<a href="https://a411046f8ec5f50e1b.gradio.live/"><img src="https://img.shields.io/badge/Gradio-Demo-yellow"/></a>
-
 # healtrecsys24
 
 This repository contains the code and data to reproduce the experiments in the paper "Insert Paper Title Here". It includes a pose classification model and tools for extracting keypoint data from human pose estimations.
+
+## Demo
+For the live demo click the following badge:
+
+<a href="https://a411046f8ec5f50e1b.gradio.live/"><img src="https://img.shields.io/badge/Gradio-Demo-yellow"/></a>
 
 ## Compatibility
 This project has been tested on:

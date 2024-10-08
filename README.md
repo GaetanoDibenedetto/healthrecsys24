@@ -1,11 +1,14 @@
+<a href="paper"><img src="https://img.shields.io/badge/CEUR WS-Paper-blue"/></a>
+<a href="https://a411046f8ec5f50e1b.gradio.live/"><img src="https://img.shields.io/badge/Gradio-Demo-yellow"/></a>
+
 # healtrecsys24
 
-This repository contains the code and data to reproduce the experiments in the paper "Insert Paper Title Here". It includes a pose classification model and tools for extracting keypoint data from human pose estimations.
+This repository contains the code and data to reproduce the experiments in the paper "Prompting Large Language Models for Tailored Exercise Recommendations in Office Spaces". It includes a pose classification model, a tool for extracting keypoint data from a human pose estimation model (MotionBERT), an angle computation module, and an exercise recommendation based on Llama-3.1-8B-Instruct.
 
 ## Demo
-For the live demo click the following badge:
+For the live demo click the following link: [Live Demo](https://a411046f8ec5f50e1b.gradio.live/)
 
-<a href="https://a411046f8ec5f50e1b.gradio.live/"><img src="https://img.shields.io/badge/Gradio-Demo-yellow"/></a>
+
 
 ## Compatibility
 This project has been tested on:
@@ -92,8 +95,3 @@ Follow these steps to reproduce the results from the paper:
 3. **Reproduce the Demo Web App**:
   - To interact with the system via a web app, run the following script:
     - `web_app.py`
-
-
-## References
-
-

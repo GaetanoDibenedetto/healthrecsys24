@@ -1,12 +1,12 @@
-<a href="paper"><img src="https://img.shields.io/badge/CEUR WS-Paper-blue"/></a>
-<a href="https://a411046f8ec5f50e1b.gradio.live/"><img src="https://img.shields.io/badge/Gradio-Demo-yellow"/></a>
+<a href="https://drive.google.com/file/d/1HPk4qrNM1clcpm8x5dLXmwU2ew4kMp-A/view?usp=drive_link"><img src="https://img.shields.io/badge/CEUR WS-Paper-blue"/></a>
+<a href="https://a79d9c8eaccdc0a0d1.gradio.live/"><img src="https://img.shields.io/badge/Gradio-Demo-yellow"/></a>
 
 # healtrecsys24
 
 This repository contains the code and data to reproduce the experiments in the paper "_Prompting Large Language Models for Tailored Exercise Recommendations in Office Spaces_". It includes a pose classification model, a tool for extracting keypoint data from a human pose estimation model (_MotionBERT_), an angle computation module, and an exercise recommendation based on _Llama-3.1-8B-Instruct_.
 
 ## Demo
-For the live demo click the following link: [Live Demo](https://a411046f8ec5f50e1b.gradio.live/)
+For the live demo click the following link: [Live Demo](https://a79d9c8eaccdc0a0d1.gradio.live/)
 
 ## Compatibility
 This project has been tested on:

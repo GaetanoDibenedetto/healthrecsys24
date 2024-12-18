@@ -1,4 +1,4 @@
-<a href="https://drive.google.com/file/d/1HPk4qrNM1clcpm8x5dLXmwU2ew4kMp-A/view?usp=drive_link"><img src="https://img.shields.io/badge/CEUR WS-Paper-blue"/></a>
+<a href="https://ceur-ws.org/Vol-3823/9_Dibenedetto_prompting_158.pdf"><img src="https://img.shields.io/badge/CEUR WS-Paper-blue"/></a>
 <a href="https://48c801551e38513255.gradio.live/"><img src="https://img.shields.io/badge/Gradio-Demo-yellow"/></a>
 <a href="https://drive.google.com/file/d/1jldPe4dpJ3uNBwujU7BoGOo1NHMOC6NJ/view?usp=sharing"><img src="https://img.shields.io/badge/Poster-PDF-red"/></a>
 

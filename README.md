@@ -1,5 +1,5 @@
 <a href="https://ceur-ws.org/Vol-3823/9_Dibenedetto_prompting_158.pdf"><img src="https://img.shields.io/badge/CEUR WS-Paper-blue"/></a>
-<a href="https://drive.google.com/file/d/1jldPe4dpJ3uNBwujU7BoGOo1NHMOC6NJ/view?usp=sharing"><img src="https://img.shields.io/badge/Poster-PDF-red"/></a>
+<a href="https://drive.google.com/file/d/1ZTYuUKm-O5MSAvEe2U0R7jiHiXRELgml/view?usp=sharing"><img src="https://img.shields.io/badge/Poster-PDF-red"/></a>
 
 # Prompting Large Language Models for Tailored Exercise Recommendations in Office Spaces
 
